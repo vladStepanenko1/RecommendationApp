@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
+import { TeamService } from '../team.service';
+import { Team } from '../Team';
 
 @Component({
   selector: 'app-teams',
@@ -7,9 +10,34 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TeamsComponent implements OnInit {
 
-  constructor() { }
+  countries:string[] = [];
+  teams:Team[] = [];
+
+  searchForm = new FormGroup({
+    teamName:new FormControl(''),
+    teamCountry:new FormControl('')
+  });
+
+  constructor(private teamService:TeamService) { }
 
   ngOnInit() {
+    this.getTeams();
+    this.getCountries();
   }
 
+  getCountries() {
+    this.countries = this.teamService.getCountries();
+  }
+
+  getTeams() {
+    this.teams = this.teamService.getTeams();
+  }
+
+  onSubmit(){
+    console.warn(this.searchForm.value);
+    
+  }
+  resetForm(){
+    this.searchForm.reset();
+  }
 }

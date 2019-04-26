@@ -1,3 +1,14 @@
-<p>
-  teams works!
-</p>
+<div class="card">
+  <div class="card-body">
+    <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+      <label for="teamName">Назва команди</label>
+      <input type="text" name="teamName" formControlName="teamName">
+      <label for="teamCountry">Країна</label>
+      <select name="teamCountry" formControlName="teamCountry">
+        <option *ngFor="let country of countries" [ngValue]="country">{{country}}</option>
+      </select>
+      <button type="submit" [disabled]="!searchForm.valid">Пошук</button>
+      <button type="button" (click)="resetForm()">Очистити поля форми</button>
+    </form>
+  </div>
+</div>
