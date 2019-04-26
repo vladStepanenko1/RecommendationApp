@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { RecommendedPlayer } from '../recommended-player';
 
 @Component({
   selector: 'app-recommended-players',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./recommended-players.component.css']
 })
 export class RecommendedPlayersComponent implements OnInit {
+
+  @Input() players:RecommendedPlayer[];
 
   constructor() { }
 

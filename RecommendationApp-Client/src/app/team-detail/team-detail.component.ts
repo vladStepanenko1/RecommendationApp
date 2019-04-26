@@ -3,6 +3,9 @@ import { Team } from '../Team';
 import { ActivatedRoute } from '@angular/router';
 import {Location} from '@angular/common';
 import { TeamService } from '../team.service';
+import { Player } from '../player';
+import { PlayerService } from '../player.service';
+import { RecommendedPlayer } from '../recommended-player';
 
 @Component({
   selector: 'app-team-detail',
@@ -12,11 +15,16 @@ import { TeamService } from '../team.service';
 export class TeamDetailComponent implements OnInit {
 
   team:Team;
+  players:Player[];
+  recommendedPlayers:RecommendedPlayer[];
+  getRecommendedPlayersButtonClicked:boolean = false;
 
-  constructor(private route:ActivatedRoute, private location:Location, private teamService:TeamService) { }
+  constructor(private route:ActivatedRoute, private location:Location, private teamService:TeamService,
+    private playerService:PlayerService) { }
 
   ngOnInit() {
     this.getTeam();
+    this.getPlayers();
   }
 
   getTeam(){
@@ -24,8 +32,13 @@ export class TeamDetailComponent implements OnInit {
     this.team = this.teamService.getTeam(teamId);
   }
 
+  getPlayers(){
+    this.players = this.playerService.getPlayers(this.team.id);
+  }
+
   getRecommendedPlayers(){
-    //TODO
+    this.recommendedPlayers = this.playerService.getRecommendedPlayers(this.team.id);
+    this.getRecommendedPlayersButtonClicked = true;
   }
 
   goBack(){
