@@ -1,0 +1,25 @@
+<div class="card">
+  <div *ngIf="team" class="card-body">
+    <div class="row">
+      <h3>{{team.name}}</h3>
+    </div>
+    <div class="row">
+      <p>Країна</p>
+      <p class="ml-3">{{team.country}}</p>
+    </div>
+    <div class="row">
+      <p>Опис</p>
+      <p class="ml-3">{{team.about}}</p>
+    </div>
+    <div class="row">
+      <p>Рейтинг</p>
+      <p class="ml-3">{{team.rating}}</p>
+    </div>
+  </div>
+  <button class="btn btn-primary" (click)="getRecommendedPlayers()">
+    <i class="fas fa-user-plus mr-1"></i>Отримати список рекомедованих гравців
+  </button>
+  <button class="btn btn-primary" (click)="goBack()">
+    <i class="fas fa-arrow-circle-left mr-1"></i>Назад
+  </button>
+</div>

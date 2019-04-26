@@ -7,6 +7,10 @@ import { TEAMS } from './mock-db';
 })
 export class TeamService {
 
+  getTeam(teamId: number): Team {
+    return TEAMS.find(team => team.id === teamId);
+  }
+
   getCountries(): string[] {
     return TEAMS.map(team => team.country);
   }
