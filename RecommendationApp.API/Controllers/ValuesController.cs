@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using RecommendationApp.API.Data;
+using RecommendationApp.API.Models;
 
 namespace RecommendationApp.API.Controllers
 {
@@ -10,12 +12,19 @@ namespace RecommendationApp.API.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
-        // GET api/values
-        [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        private ITeamRepository _teamRepository;
+
+        public ValuesController(ITeamRepository teamRepository)
         {
-            return new string[] { "value1", "value2" };
+            _teamRepository = teamRepository;
         }
+
+        // GET api/values
+        // [HttpGet]
+        // public ActionResult<IEnumerable<string>> Get()
+        // {
+        //     return new string[] { "value1", "value2" };
+        // }
 
         // GET api/values/5
         [HttpGet("{id}")]
@@ -40,6 +49,12 @@ namespace RecommendationApp.API.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+        }
+
+        [HttpGet]
+        public ActionResult<IEnumerable<Team>> Get()
+        {
+            return _teamRepository.GetTeams().ToList();
         }
     }
 }
