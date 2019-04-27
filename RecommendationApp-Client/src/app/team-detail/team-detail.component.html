@@ -18,7 +18,7 @@
     <app-players [players]="players"></app-players>
     <app-recommended-players *ngIf="getRecommendedPlayersButtonClicked" [players]="recommendedPlayers"></app-recommended-players>
   </div>
-  <button class="btn btn-primary" (click)="getRecommendedPlayers()">
+  <button class="btn btn-primary" *ngIf="!getRecommendedPlayersButtonClicked" (click)="getRecommendedPlayers()">
     <i class="fas fa-user-plus mr-1"></i>Отримати список рекомедованих гравців
   </button>
   <button class="btn btn-primary" (click)="goBack()">
