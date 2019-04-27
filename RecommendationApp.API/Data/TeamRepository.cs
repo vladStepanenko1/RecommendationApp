@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Npgsql;
 using NpgsqlTypes;
+using RecommendationApp.API.Models;
 
 namespace RecommendationApp.API.Data
 {

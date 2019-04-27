@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using RecommendationApp.API.Models;
 
 namespace RecommendationApp.API.Data
 {
