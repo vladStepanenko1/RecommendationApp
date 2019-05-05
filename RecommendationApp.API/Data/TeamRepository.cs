@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Npgsql;
 using NpgsqlTypes;
+using RecommendationApp.API.Helpers;
 using RecommendationApp.API.Models;
 
 namespace RecommendationApp.API.Data
@@ -52,7 +54,7 @@ namespace RecommendationApp.API.Data
             return team;
         }
 
-        public IEnumerable<Team> GetTeams()
+        public PagedList<Team> GetTeams(UserParams userParams)
         {
             string sql = "select profile_id, name, about, country, rating from core.teams_data where rating > 0";
             List<Team> teams = new List<Team>();
@@ -60,13 +62,11 @@ namespace RecommendationApp.API.Data
             using (NpgsqlCommand command = new NpgsqlCommand(sql, _connection))
             {
                 NpgsqlDataReader dataReader = command.ExecuteReader();
-
                 int teamId;
                 string name;
                 string about;
                 string country;
                 double rating;
-
                 while (dataReader.Read())
                 {
                     teamId = Convert.ToInt32(dataReader["profile_id"]);
@@ -79,7 +79,7 @@ namespace RecommendationApp.API.Data
                 dataReader.Close();
             }
             _connection.Close();
-            return teams;
+            return PagedList<Team>.Create(teams.AsQueryable(), userParams.PageNumber, userParams.PageSize);
         }
     }
 }
