@@ -35,6 +35,15 @@
           <td><a routerLink="/team/{{team.id}}">Повна інформація</a></td>
         </tr>
       </tbody>
+      <tfoot>
+        <pagination [totalItems]="pagination.totalItems" 
+                    [(ngModel)]="pagination.currentPage" 
+                    [maxSize]=maxSize
+                    [boundaryLinks]="true" 
+                    [directionLinks]="false" 
+                    (pageChanged)="pageChanged($event)">
+        </pagination>
+      </tfoot>
     </table>
   </div>
 </div>

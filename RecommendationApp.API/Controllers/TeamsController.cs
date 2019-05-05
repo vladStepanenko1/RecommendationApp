@@ -19,11 +19,10 @@ namespace RecommendationApp.API.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get([FromQuery]UserParams userParams)
+        public IActionResult Get([FromQuery]TeamParams teamParams)
         {
-            var teams = _teamRepository.GetTeams(userParams);
-            Response.AddPagination(teams.CurrentPage, teams.PageSize, teams.TotalCount, 
-                teams.TotalPages);
+            var teams = _teamRepository.GetTeams(teamParams);
+            Response.AddPagination(teams.CurrentPage, teams.PageSize, teams.TotalCount, teams.TotalPages);
             return Ok(teams);
         }
     }

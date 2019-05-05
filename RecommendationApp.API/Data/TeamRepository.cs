@@ -54,10 +54,10 @@ namespace RecommendationApp.API.Data
             return team;
         }
 
-        public PagedList<Team> GetTeams(UserParams userParams)
+        public PagedList<Team> GetTeams(TeamParams teamParams)
         {
             string sql = "select profile_id, name, about, country, rating from core.teams_data where rating > 0";
-            List<Team> teams = new List<Team>();
+            List<Team> teamsFromDb = new List<Team>();
             _connection.Open();
             using (NpgsqlCommand command = new NpgsqlCommand(sql, _connection))
             {
@@ -74,12 +74,27 @@ namespace RecommendationApp.API.Data
                     about = Convert.ToString(dataReader["about"]);
                     country = Convert.ToString(dataReader["country"]);
                     rating = Convert.ToDouble(dataReader["rating"]);
-                    teams.Add(new Team(teamId, name, about, country, rating));
+                    teamsFromDb.Add(new Team(teamId, name, about, country, rating));
                 }
                 dataReader.Close();
             }
             _connection.Close();
-            return PagedList<Team>.Create(teams.AsQueryable(), userParams.PageNumber, userParams.PageSize);
+
+            IQueryable<Team> teams = teamsFromDb.AsQueryable();
+
+            if(!string.IsNullOrEmpty(teamParams.Name))
+            {
+                teams = teams.Where(t => t.Name == teamParams.Name);
+            }
+
+            if(!string.IsNullOrEmpty(teamParams.Country))
+            {
+                teams = teams.Where(t => t.Country == teamParams.Country);
+            }
+            
+            teams = teams.Where(t => t.Rating > teamParams.MinRating && t.Rating < teamParams.MaxRating);
+
+            return PagedList<Team>.Create(teams, teamParams.PageNumber, teamParams.PageSize);
         }
     }
 }
