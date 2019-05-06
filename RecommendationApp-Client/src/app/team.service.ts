@@ -37,10 +37,21 @@ export class TeamService {
     }
 
     if(teamParams != null){
-      params = params.append('name', teamParams.name);
-      params = params.append('country', teamParams.country);
-      params = params.append('minRating', teamParams.minRating);
-      params = params.append('maxRating', teamParams.maxRating);
+      if(teamParams.name){
+        params = params.append('name', teamParams.name);
+      }
+
+      if(teamParams.country){
+        params = params.append('country', teamParams.country);
+      }
+
+      if(teamParams.minRating){
+        params = params.append('minRating', teamParams.minRating);
+      }
+
+      if(teamParams.maxRating){
+        params = params.append('maxRating', teamParams.maxRating);
+      }
     }
 
     return this.http.get<Team[]>(this.baseUrl + 'teams', {observe:'response', params})

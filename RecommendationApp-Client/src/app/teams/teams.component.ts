@@ -11,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./teams.component.css']
 })
 export class TeamsComponent implements OnInit {
-  countries:string[] = [];
+  countries:string[];
   teams:Team[];
   pagination:Pagination;
   teamParams:any = {};
@@ -33,8 +33,7 @@ export class TeamsComponent implements OnInit {
     this.route.data.subscribe(data => {
       this.teams = data.teams.result;
       this.pagination = data.teams.pagination;
-      console.log(data);
-      
+      this.countries = data.countries;
     });
   }
 
