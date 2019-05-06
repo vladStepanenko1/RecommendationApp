@@ -13,9 +13,14 @@ import { HttpClientModule }    from '@angular/common/http';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { TeamsResolver } from './_resolvers/teams.resolver';
 import { TeamService } from './team.service';
+import { CountriesResolver } from './_resolvers/countries.resolver';
 
 const routes:Routes = [
-  {path:'teams', component:TeamsComponent, resolve:{teams:TeamsResolver}},
+  {
+    path:'teams', 
+    component:TeamsComponent, 
+    resolve:{teams:TeamsResolver, countries:CountriesResolver}
+  },
   {path:'team/:id', component:TeamDetailComponent}
 ];
 
@@ -38,7 +43,8 @@ const routes:Routes = [
   ],
   providers: [
     TeamService,
-    TeamsResolver
+    TeamsResolver,
+    CountriesResolver
   ],
   bootstrap: [AppComponent]
 })

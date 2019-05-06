@@ -11,8 +11,16 @@
           <option *ngFor="let country of countries" [ngValue]="country">{{country}}</option>
         </select>
       </div>
+      <div class="form-group mr-3">
+        <label for="teamMinRating">Рейтинг від</label>
+        <input type="number" class="form-control ml-1" name="teamMinRating" formControlName="teamMinRating">
+      </div>
+      <div class="form-group mr-3">
+        <label for="teamMaxRating">до</label>
+        <input type="number" class="form-control ml-1" name="teamMaxRating" formControlName="teamMaxRating">
+      </div>
       <button type="submit" class="btn btn-primary mr-2" [disabled]="!searchForm.valid">Пошук</button>
-      <button type="button" class="btn btn-primary" (click)="resetForm()">Очистити поля форми</button>
+      <button type="button" class="btn btn-primary" (click)="resetForm()">Очистити фільтр</button>
     </form>
   </div>
 </div>

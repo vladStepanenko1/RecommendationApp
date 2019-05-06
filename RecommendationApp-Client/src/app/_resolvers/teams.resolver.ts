@@ -12,9 +12,9 @@ export class TeamsResolver implements Resolve<Team[]>{
     resolve(route:ActivatedRouteSnapshot):Observable<Team[]>{
         return this.teamService.getTeams().pipe(
             catchError(error => {
-                this.router.navigate(['/']);
+                //this.router.navigate(['/']);
                 return of(null);
             })
-        )
+        );
     }
 }

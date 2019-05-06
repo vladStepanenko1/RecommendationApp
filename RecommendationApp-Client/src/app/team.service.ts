@@ -18,17 +18,29 @@ export class TeamService {
     return TEAMS.find(team => team.id === teamId);
   }
 
-  getCountries(): string[] {
-    return TEAMS.map(team => team.country);
+  getCountries(): Observable<string[]> {
+    return this.http.get<string[]>(this.baseUrl + 'countries', {observe:'response'})
+      .pipe(
+        map(response => {
+          return response.body;
+        })
+      );
   }
 
-  getTeams(page?, itemsPerPage?): Observable<PaginatedResult<Team[]>> {
+  getTeams(page?, itemsPerPage?, teamParams?): Observable<PaginatedResult<Team[]>> {
     const paginatedResult: PaginatedResult<Team[]> = new PaginatedResult<Team[]>();
     let params = new HttpParams();
 
     if(page != null && itemsPerPage != null){
       params = params.append('pageNumber', page);
       params = params.append('pageSize', itemsPerPage);
+    }
+
+    if(teamParams != null){
+      params = params.append('name', teamParams.name);
+      params = params.append('country', teamParams.country);
+      params = params.append('minRating', teamParams.minRating);
+      params = params.append('maxRating', teamParams.maxRating);
     }
 
     return this.http.get<Team[]>(this.baseUrl + 'teams', {observe:'response', params})
