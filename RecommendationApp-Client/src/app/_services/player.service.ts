@@ -8,12 +8,12 @@ import { RecommendedPlayer } from '../recommended-player';
 })
 export class PlayerService {
   getRecommendedPlayers(teamId: number): RecommendedPlayer[] {
-    return RECOMMENDED_PLAYERS.sort((p1, p2) => p2.calculatedRating - p1.calculatedRating);
+    throw new Error("Not implemented");
   }
 
   getPlayers(teamId: number): Player[] {
-    return PLAYERS.filter(player => player.teamId === teamId);
+    throw new Error("Not implemented");
   }
-
+  
   constructor() { }
 }
