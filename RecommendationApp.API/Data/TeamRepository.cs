@@ -74,7 +74,7 @@ namespace RecommendationApp.API.Data
                     about = Convert.ToString(dataReader["about"]);
                     country = Convert.ToString(dataReader["country"]);
                     rating = Convert.ToDouble(dataReader["rating"]);
-                    teamsFromDb.Add(new Team(teamId, name, about, country, rating));
+                    teamsFromDb.Add(new Team(teamId, name, country, about, rating));
                 }
                 dataReader.Close();
             }
@@ -84,7 +84,7 @@ namespace RecommendationApp.API.Data
 
             if(!string.IsNullOrEmpty(teamParams.Name))
             {
-                teams = teams.Where(t => t.Name == teamParams.Name);
+                teams = teams.Where(t => t.Name.ToLower().Contains(teamParams.Name.ToLower()));
             }
 
             if(!string.IsNullOrEmpty(teamParams.Country))
