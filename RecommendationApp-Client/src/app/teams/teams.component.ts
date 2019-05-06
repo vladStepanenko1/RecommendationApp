@@ -16,8 +16,6 @@ export class TeamsComponent implements OnInit {
   pagination:Pagination;
   teamParams:any = {};
 
-  pageNumber = 1;
-  pageSize = 5;
   maxSize = 10;
 
   searchForm = new FormGroup({

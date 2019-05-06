@@ -25,5 +25,18 @@ namespace RecommendationApp.API.Controllers
             Response.AddPagination(teams.CurrentPage, teams.PageSize, teams.TotalCount, teams.TotalPages);
             return Ok(teams);
         }
+
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
+        {
+            var team = _teamRepository.GetTeam(id);
+
+            if(team == null)
+            {
+                return BadRequest("Team not found");
+            }
+
+            return Ok(team);
+        }
     }
 }

@@ -46,7 +46,7 @@ namespace RecommendationApp.API.Data
                     about = Convert.ToString(dataReader["about"]);
                     country = Convert.ToString(dataReader["country"]);
                     rating = Convert.ToDouble(dataReader["rating"]);
-                    team = new Team(teamId, name, about, country, rating);
+                    team = new Team(teamId, name, country, about, rating);
                 }
                 dataReader.Close();
             }

@@ -3,7 +3,7 @@ namespace RecommendationApp.API.Helpers
     public class TeamParams
     {
         private const int MaxPageSize = 25;
-        private int pageSize = 10;
+        private int pageSize = 7;
         public int PageNumber { get; set; } = 1;
         public int PageSize
         { 
