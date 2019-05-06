@@ -1,3 +1,6 @@
 input[type=number]{
     width: 100px;
 }
+a:hover{
+    text-decoration: none !important;
+}

@@ -14,6 +14,7 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { TeamsResolver } from './_resolvers/teams.resolver';
 import { TeamService } from './team.service';
 import { CountriesResolver } from './_resolvers/countries.resolver';
+import { ErrorInterceptorProvider } from './_services/error.interceptor';
 
 const routes:Routes = [
   {
@@ -42,9 +43,10 @@ const routes:Routes = [
     HttpClientModule,
   ],
   providers: [
+    ErrorInterceptorProvider,
     TeamService,
     TeamsResolver,
-    CountriesResolver
+    CountriesResolver,
   ],
   bootstrap: [AppComponent]
 })

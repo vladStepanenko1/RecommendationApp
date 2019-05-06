@@ -1,3 +1,4 @@
+using System;
 using Microsoft.AspNetCore.Mvc;
 using RecommendationApp.API.Data;
 
@@ -17,6 +18,7 @@ namespace RecommendationApp.API.Controllers
         [HttpGet]
         public IActionResult Get()
         {
+            throw new Exception("Can't get countries");
             var countries = _teamRepository.GetCountries();
             return Ok(countries);
         }
