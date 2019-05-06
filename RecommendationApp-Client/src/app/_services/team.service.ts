@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Team } from './Team';
-import { TEAMS } from './mock-db';
+import { Team } from '../Team';
+import { TEAMS } from '../mock-db';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { PaginatedResult } from './_models/pagination';
+import { PaginatedResult } from '../_models/pagination';
 import { Observable } from 'rxjs';
 import {map} from 'rxjs/operators';
 

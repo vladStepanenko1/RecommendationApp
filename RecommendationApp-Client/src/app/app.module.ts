@@ -12,7 +12,7 @@ import { RecommendedPlayersComponent } from './recommended-players/recommended-p
 import { HttpClientModule }    from '@angular/common/http';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { TeamsResolver } from './_resolvers/teams.resolver';
-import { TeamService } from './team.service';
+import { TeamService } from './_services/team.service';
 import { CountriesResolver } from './_resolvers/countries.resolver';
 import { ErrorInterceptorProvider } from './_services/error.interceptor';
 

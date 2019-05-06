@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { TeamService } from '../team.service';
+import { TeamService } from '../_services/team.service';
 import { Team } from '../Team';
 import { Pagination, PaginatedResult } from '../_models/pagination';
 import { ActivatedRoute } from '@angular/router';

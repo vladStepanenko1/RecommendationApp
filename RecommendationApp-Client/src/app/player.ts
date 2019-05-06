@@ -1,4 +1,4 @@
-export class Player{
+export interface Player{
     id:number;
     gender:string;
     country:string;

@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Team } from '../Team';
 import { ActivatedRoute } from '@angular/router';
 import {Location} from '@angular/common';
-import { TeamService } from '../team.service';
+import { TeamService } from '../_services/team.service';
 import { Player } from '../player';
-import { PlayerService } from '../player.service';
+import { PlayerService } from '../_services/player.service';
 import { RecommendedPlayer } from '../recommended-player';
 
 @Component({

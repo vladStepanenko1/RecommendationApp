@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { PLAYERS, RECOMMENDED_PLAYERS } from './mock-db';
-import { Player } from './player';
-import { RecommendedPlayer } from './recommended-player';
+import { PLAYERS, RECOMMENDED_PLAYERS } from '../mock-db';
+import { Player } from '../player';
+import { RecommendedPlayer } from '../recommended-player';
 
 @Injectable({
   providedIn: 'root'
