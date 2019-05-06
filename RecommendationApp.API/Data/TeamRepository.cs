@@ -96,5 +96,26 @@ namespace RecommendationApp.API.Data
 
             return PagedList<Team>.Create(teams, teamParams.PageNumber, teamParams.PageSize);
         }
+
+        public IEnumerable<string> GetCountries()
+        {
+            string sql = "select distinct country from core.teams_data where rating > 0";
+            List<string> countries = new List<string>();
+            _connection.Open();
+            using(NpgsqlCommand command = new NpgsqlCommand(sql, _connection))
+            {
+                NpgsqlDataReader reader = command.ExecuteReader();
+                string countryName;
+                while(reader.Read())
+                {
+                    countryName = Convert.ToString(reader["country"]);
+                    countries.Add(countryName);
+                }
+                reader.Close();
+            }
+            _connection.Close();
+            
+            return countries;
+        }
     }
 }

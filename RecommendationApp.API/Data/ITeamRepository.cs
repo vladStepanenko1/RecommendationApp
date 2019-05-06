@@ -8,5 +8,6 @@ namespace RecommendationApp.API.Data
     {
         PagedList<Team> GetTeams(TeamParams teamParams);
         Team GetTeam(int id);
+        IEnumerable<string> GetCountries();
     }
 }
