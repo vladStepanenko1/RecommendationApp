@@ -3,10 +3,10 @@ using System.Collections.Generic;
 
 namespace RecommendationApp.API.Models
 {
-    public partial class TeamBestMaps
+    public partial class ProfilesRatings
     {
         public long ProfileId { get; set; }
-        public short? Place { get; set; }
-        public string MapName { get; set; }
+        public float Rating { get; set; }
+        public int NumRates { get; set; }
     }
 }

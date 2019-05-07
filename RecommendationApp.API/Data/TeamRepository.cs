@@ -1,8 +1,5 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using Npgsql;
-using NpgsqlTypes;
 using RecommendationApp.API.Helpers;
 using RecommendationApp.API.Models;
 

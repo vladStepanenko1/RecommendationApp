@@ -2,10 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Team } from '../_models/team';
 import { ActivatedRoute } from '@angular/router';
 import {Location} from '@angular/common';
-import { TeamService } from '../_services/team.service';
-import { Player } from '../player';
-import { PlayerService } from '../_services/player.service';
-import { RecommendedPlayer } from '../recommended-player';
+import { Player } from '../_models/player';
 
 @Component({
   selector: 'app-team-detail',
@@ -14,31 +11,19 @@ import { RecommendedPlayer } from '../recommended-player';
 })
 export class TeamDetailComponent implements OnInit {
   team:Team;
-  //players:Player[];
-  //recommendedPlayers:RecommendedPlayer[];
-  //getRecommendedPlayersButtonClicked:boolean = false;
+  playersTableName:string;
+  recommendedPlayersTableName:string;
+  recommendedPlayers:Player[];
 
-  constructor(private route:ActivatedRoute, private location:Location, private teamService:TeamService) { }
+  constructor(private route:ActivatedRoute, private location:Location) { }
 
   ngOnInit() {
     this.route.data.subscribe(data => {
       this.team = data.team;
     });
+    this.playersTableName = "Гравці команди";
+    this.recommendedPlayersTableName = "Рекомендовані гравці";
   }
-
-  // getTeam(){
-  //   const teamId = Number.parseInt(this.route.snapshot.paramMap.get('id'));
-  //   this.team = this.teamService.getTeam(teamId);
-  // }
-
-  // getPlayers(){
-  //   this.players = this.playerService.getPlayers(this.team.id);
-  // }
-
-  // getRecommendedPlayers(){
-  //   this.recommendedPlayers = this.playerService.getRecommendedPlayers(this.team.id);
-  //   this.getRecommendedPlayersButtonClicked = true;
-  // }
 
   goBack(){
     this.location.back();

@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 using RecommendationApp.API.Data;
 using RecommendationApp.API.Dto;
 using RecommendationApp.API.Helpers;
-using RecommendationApp.API.Models;
 
 namespace RecommendationApp.API.Controllers
 {
@@ -14,11 +13,14 @@ namespace RecommendationApp.API.Controllers
     public class TeamsController:ControllerBase
     {
         private ITeamRepository _teamRepository;
+        private IPlayerRepository _playerRepository;
         private IMapper _mapper;
 
-        public TeamsController(ITeamRepository teamRepository, IMapper mapper)
+        public TeamsController(ITeamRepository teamRepository, IPlayerRepository playerRepository, 
+            IMapper mapper)
         {
             _teamRepository = teamRepository;
+            _playerRepository = playerRepository;
             _mapper = mapper;
         }
 
@@ -42,9 +44,20 @@ namespace RecommendationApp.API.Controllers
             }
 
             var teamToReturn = _mapper.Map<TeamForDetailsDto>(team);
+
             var bestMaps = _teamRepository.GetBestMaps(team.ProfileId);
             var bestMapsToReturn = _mapper.Map<IEnumerable<TeamBestMapsDto>>(bestMaps);
             teamToReturn.BestMaps = bestMapsToReturn.ToList();
+
+            var players = _playerRepository.GetPlayers(team.ProfileId);
+            var playersToReturn = _mapper.Map<IEnumerable<PlayerForListDto>>(players);
+
+            foreach(var playerDto in playersToReturn)
+            {
+                playerDto.AverageRating = _playerRepository.GetRating(playerDto.Id);
+            }
+
+            teamToReturn.Players = playersToReturn.ToList();
             return Ok(teamToReturn);
         }
     }

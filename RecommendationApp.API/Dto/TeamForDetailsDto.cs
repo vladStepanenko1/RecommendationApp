@@ -12,5 +12,6 @@ namespace RecommendationApp.API.Dto
         public float Rating { get; set; }
         public DateTime CreatedAt { get; set; }
         public ICollection<TeamBestMapsDto> BestMaps { get; set; }
+        public ICollection<PlayerForListDto> Players { get; set; }
     }
 }

@@ -8,7 +8,6 @@ import { RouterModule, Routes } from '@angular/router';
 import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 import { TeamDetailComponent } from './team-detail/team-detail.component';
 import { PlayersComponent } from './players/players.component';
-import { RecommendedPlayersComponent } from './recommended-players/recommended-players.component';
 import { HttpClientModule }    from '@angular/common/http';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { TeamsResolver } from './_resolvers/teams.resolver';
@@ -21,12 +20,19 @@ const routes:Routes = [
   {
     path:'teams', 
     component:TeamsComponent, 
-    resolve:{teams:TeamsResolver, countries:CountriesResolver}
+    resolve:
+    {
+      teams:TeamsResolver, 
+      countries:CountriesResolver
+    }
   },
   {
     path:'team/:id', 
     component:TeamDetailComponent,
-    resolve:{team:TeamDetailResolver}
+    resolve:
+    {
+      team:TeamDetailResolver
+    }
   }
 ];
 
@@ -36,7 +42,6 @@ const routes:Routes = [
     TeamsComponent,
     TeamDetailComponent,
     PlayersComponent,
-    RecommendedPlayersComponent
   ],
   imports: [
     BrowserModule,

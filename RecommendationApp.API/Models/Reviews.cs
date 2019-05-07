@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace RecommendationApp.API
+namespace RecommendationApp.API.Models
 {
     public partial class Reviews
     {

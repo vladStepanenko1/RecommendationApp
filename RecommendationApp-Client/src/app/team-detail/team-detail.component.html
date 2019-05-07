@@ -9,21 +9,18 @@
     </div>
     <div class="row">
       <p>Опис</p>
-      <p class="ml-3">{{team.about}}</p>
+      <p class="ml-3">{{team.about || 'Опис не вказано'}}</p>
     </div>
     <div class="row">
       <p>Рейтинг</p>
-      <p class="ml-3">{{team.rating}}</p>
+      <p class="ml-3">{{team.rating | number:'1.1-1'}}</p>
     </div>
     <div class="row">
       <p *ngFor="let map of team.bestMaps" class="mr-3">{{map.mapName}}</p>
     </div>
-    <app-players [players]="players"></app-players>
-    <app-recommended-players *ngIf="getRecommendedPlayersButtonClicked" [players]="recommendedPlayers"></app-recommended-players>
+    <app-players [players]="team.players" [tableName]="playersTableName"></app-players>
+    <app-players *ngIf="recommendedPlayers" [players]="recommendedPlayers" [tableName]="playersTableName"></app-players>
   </div>
-  <button class="btn btn-primary" *ngIf="!getRecommendedPlayersButtonClicked" (click)="getRecommendedPlayers()">
-    <i class="fas fa-user-plus mr-1"></i>Отримати список рекомедованих гравців
-  </button>
   <button class="btn btn-primary" (click)="goBack()">
     <i class="fas fa-arrow-circle-left mr-1"></i>Назад
   </button>

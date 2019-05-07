@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Player } from '../player';
+import { Player } from '../_models/player';
 
 @Component({
   selector: 'app-players',
@@ -9,6 +9,7 @@ import { Player } from '../player';
 export class PlayersComponent implements OnInit {
 
   @Input() players:Player[];
+  @Input() tableName:string;
 
   constructor() { }
 

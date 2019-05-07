@@ -1,8 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using RecommendationApp.API.Models;
 
-namespace RecommendationApp.API
+namespace RecommendationApp.API.Data
 {
     public partial class DreamTeamContext : DbContext
     {
@@ -19,21 +20,13 @@ namespace RecommendationApp.API
         public virtual DbSet<PlayersStatsLog> PlayersStatsLog { get; set; }
         public virtual DbSet<Profiles> Profiles { get; set; }
         public virtual DbSet<Profiles1> Profiles1 { get; set; }
+        public virtual DbSet<ProfilesRatings> ProfilesRatings { get; set; }
         public virtual DbSet<Reviews> Reviews { get; set; }
         public virtual DbSet<TeamBestMaps> TeamBestMaps { get; set; }
         public virtual DbSet<TeamsData> TeamsData { get; set; }
         public virtual DbSet<TeamsUsers> TeamsUsers { get; set; }
         public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<WeaponsStats> WeaponsStats { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-//             if (!optionsBuilder.IsConfigured)
-//             {
-// #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-//                 optionsBuilder.UseNpgsql("Host=localhost;Database=dreamteam;Username=postgres;Password=postgres");
-//             }
-        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -136,6 +129,22 @@ namespace RecommendationApp.API
                 entity.Property(e => e.UpdatedAt)
                     .HasColumnName("updated_at")
                     .HasColumnType("timestamp with time zone");
+            });
+
+            modelBuilder.Entity<ProfilesRatings>(entity =>
+            {
+                entity.HasKey(e => e.ProfileId)
+                    .HasName("profiles_ratings_pkey");
+
+                entity.ToTable("profiles_ratings", "games");
+
+                entity.Property(e => e.ProfileId)
+                    .HasColumnName("profile_id")
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.NumRates).HasColumnName("num_rates");
+
+                entity.Property(e => e.Rating).HasColumnName("rating");
             });
 
             modelBuilder.Entity<Reviews>(entity =>
