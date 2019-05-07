@@ -19,7 +19,10 @@
       <p *ngFor="let map of team.bestMaps" class="mr-3">{{map.mapName}}</p>
     </div>
     <app-players [players]="team.players" [tableName]="playersTableName"></app-players>
-    <app-players *ngIf="recommendedPlayers" [players]="recommendedPlayers" [tableName]="playersTableName"></app-players>
+    <app-players *ngIf="recommendedPlayers" 
+                  [players]="recommendedPlayers" 
+                  [tableName]="playersTableName">
+    </app-players>
   </div>
   <button class="btn btn-primary" (click)="goBack()">
     <i class="fas fa-arrow-circle-left mr-1"></i>Назад

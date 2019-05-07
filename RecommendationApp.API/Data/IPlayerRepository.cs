@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using RecommendationApp.API.Helpers;
 using RecommendationApp.API.Models;
 
@@ -8,5 +9,6 @@ namespace RecommendationApp.API.Data
         PagedList<Users> GetPlayers(long teamId);
         Users GetPlayer(long id);
         float GetRating(long id);
+        IEnumerable<Users> GetRecommendedPlayers(long teamId);
     }
 }

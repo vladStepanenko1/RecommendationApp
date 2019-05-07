@@ -15,6 +15,7 @@ import { TeamService } from './_services/team.service';
 import { CountriesResolver } from './_resolvers/countries.resolver';
 import { ErrorInterceptorProvider } from './_services/error.interceptor';
 import { TeamDetailResolver } from './_resolvers/team-detail.resolver';
+import { RecommendedPlayersResolver } from './_resolvers/recommendedPlayers.resolver';
 
 const routes:Routes = [
   {
@@ -31,7 +32,8 @@ const routes:Routes = [
     component:TeamDetailComponent,
     resolve:
     {
-      team:TeamDetailResolver
+      team:TeamDetailResolver,
+      recommendedPlayers:RecommendedPlayersResolver
     }
   }
 ];
@@ -57,7 +59,8 @@ const routes:Routes = [
     TeamService,
     TeamsResolver,
     CountriesResolver,
-    TeamDetailResolver
+    TeamDetailResolver,
+    RecommendedPlayersResolver
   ],
   bootstrap: [AppComponent]
 })

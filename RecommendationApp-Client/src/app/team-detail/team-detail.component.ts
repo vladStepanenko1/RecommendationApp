@@ -20,6 +20,7 @@ export class TeamDetailComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe(data => {
       this.team = data.team;
+      this.recommendedPlayers = data.recommendedPlayers;
     });
     this.playersTableName = "Гравці команди";
     this.recommendedPlayersTableName = "Рекомендовані гравці";

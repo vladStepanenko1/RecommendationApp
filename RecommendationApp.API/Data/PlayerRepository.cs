@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using RecommendationApp.API.Helpers;
 using RecommendationApp.API.Models;
@@ -37,6 +39,11 @@ namespace RecommendationApp.API.Data
                 .Average();
             
             return rating;
+        }
+
+        public IEnumerable<Users> GetRecommendedPlayers(long teamId)
+        {
+            throw new NotImplementedException();
         }
     }
 }
