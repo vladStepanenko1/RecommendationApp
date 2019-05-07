@@ -13,33 +13,32 @@ import { RecommendedPlayer } from '../recommended-player';
   styleUrls: ['./team-detail.component.css']
 })
 export class TeamDetailComponent implements OnInit {
-
   team:Team;
-  players:Player[];
-  recommendedPlayers:RecommendedPlayer[];
-  getRecommendedPlayersButtonClicked:boolean = false;
+  //players:Player[];
+  //recommendedPlayers:RecommendedPlayer[];
+  //getRecommendedPlayersButtonClicked:boolean = false;
 
-  constructor(private route:ActivatedRoute, private location:Location, private teamService:TeamService,
-    private playerService:PlayerService) { }
+  constructor(private route:ActivatedRoute, private location:Location, private teamService:TeamService) { }
 
   ngOnInit() {
-    this.getTeam();
-    this.getPlayers();
+    this.route.data.subscribe(data => {
+      this.team = data.team;
+    });
   }
 
-  getTeam(){
-    const teamId = Number.parseInt(this.route.snapshot.paramMap.get('id'));
-    this.team = this.teamService.getTeam(teamId);
-  }
+  // getTeam(){
+  //   const teamId = Number.parseInt(this.route.snapshot.paramMap.get('id'));
+  //   this.team = this.teamService.getTeam(teamId);
+  // }
 
-  getPlayers(){
-    this.players = this.playerService.getPlayers(this.team.id);
-  }
+  // getPlayers(){
+  //   this.players = this.playerService.getPlayers(this.team.id);
+  // }
 
-  getRecommendedPlayers(){
-    this.recommendedPlayers = this.playerService.getRecommendedPlayers(this.team.id);
-    this.getRecommendedPlayersButtonClicked = true;
-  }
+  // getRecommendedPlayers(){
+  //   this.recommendedPlayers = this.playerService.getRecommendedPlayers(this.team.id);
+  //   this.getRecommendedPlayersButtonClicked = true;
+  // }
 
   goBack(){
     this.location.back();

@@ -14,8 +14,13 @@ export class TeamService {
 
   baseUrl = environment.apiUrl;
 
-  getTeam(teamId: number): Team {
-    return TEAMS.find(team => team.id === teamId);
+  getTeam(teamId: number): Observable<Team> {
+    return this.http.get<Team>(this.baseUrl + 'teams/' + teamId, {observe:'response'})
+      .pipe(
+        map(response => {
+          return response.body;
+        })
+      );
   }
 
   getCountries(): Observable<string[]> {

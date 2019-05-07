@@ -15,6 +15,7 @@ import { TeamsResolver } from './_resolvers/teams.resolver';
 import { TeamService } from './_services/team.service';
 import { CountriesResolver } from './_resolvers/countries.resolver';
 import { ErrorInterceptorProvider } from './_services/error.interceptor';
+import { TeamDetailResolver } from './_resolvers/team-detail.resolver';
 
 const routes:Routes = [
   {
@@ -22,7 +23,11 @@ const routes:Routes = [
     component:TeamsComponent, 
     resolve:{teams:TeamsResolver, countries:CountriesResolver}
   },
-  {path:'team/:id', component:TeamDetailComponent}
+  {
+    path:'team/:id', 
+    component:TeamDetailComponent,
+    resolve:{team:TeamDetailResolver}
+  }
 ];
 
 @NgModule({
@@ -47,6 +52,7 @@ const routes:Routes = [
     TeamService,
     TeamsResolver,
     CountriesResolver,
+    TeamDetailResolver
   ],
   bootstrap: [AppComponent]
 })
