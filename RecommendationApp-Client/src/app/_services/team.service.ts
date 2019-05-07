@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Team } from '../Team';
-import { TEAMS } from '../mock-db';
+import { Team } from '../_models/team';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { PaginatedResult } from '../_models/pagination';

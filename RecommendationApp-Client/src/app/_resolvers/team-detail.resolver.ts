@@ -1,5 +1,5 @@
 import { Resolve, Router, ActivatedRouteSnapshot } from '@angular/router';
-import { Team } from '../Team';
+import { Team } from '../_models/team';
 import { Injectable } from '@angular/core';
 import { TeamService } from '../_services/team.service';
 import { Observable, of } from 'rxjs';

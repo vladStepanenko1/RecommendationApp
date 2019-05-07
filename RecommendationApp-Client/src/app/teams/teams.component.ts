@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { TeamService } from '../_services/team.service';
-import { Team } from '../Team';
+import { Team } from '../_models/team';
 import { Pagination, PaginatedResult } from '../_models/pagination';
 import { ActivatedRoute } from '@angular/router';
 
@@ -34,10 +34,6 @@ export class TeamsComponent implements OnInit {
       this.countries = data.countries;
     });
   }
-
-  // getCountries() {
-  //   this.countries = this.teamService.getCountries();
-  // }
 
   getTeams() {
     this.teamService.getTeams(this.pagination.currentPage, this.pagination.itemsPerPage, this.teamParams)
