@@ -6,8 +6,8 @@ namespace RecommendationApp.API.Data
 {
     public interface ITeamRepository
     {
-        PagedList<Team> GetTeams(TeamParams teamParams);
-        Team GetTeam(int id);
+        PagedList<TeamsData> GetTeams(TeamParams teamParams);
+        TeamsData GetTeam(int id);
         IEnumerable<string> GetCountries();
     }
 }
