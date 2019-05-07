@@ -9,5 +9,6 @@ namespace RecommendationApp.API.Data
         PagedList<TeamsData> GetTeams(TeamParams teamParams);
         TeamsData GetTeam(int id);
         IEnumerable<string> GetCountries();
+        IEnumerable<TeamBestMaps> GetBestMaps(long id);
     }
 }

@@ -51,5 +51,11 @@ namespace RecommendationApp.API.Data
 
             return countries;
         }
+
+        public IEnumerable<TeamBestMaps> GetBestMaps(long id)
+        {
+            var bestMaps = _context.TeamBestMaps.Where(bm => bm.ProfileId == id);
+            return bestMaps;
+        }
     }
 }
