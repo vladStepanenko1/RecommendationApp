@@ -21,8 +21,15 @@ import { PlayerDetailComponent } from './player-detail/player-detail.component';
 import { PlayerDetailResolver } from './_resolvers/player-detail.resolver';
 import { MapsStatComponent } from './maps-stat/maps-stat.component';
 import { WeaponsStatComponent } from './weapons-stat/weapons-stat.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { HelpComponent } from './help/help.component';
 
 const routes:Routes = [
+  {
+    path:'',
+    redirectTo:'/teams',
+    pathMatch:'full'
+  },
   {
     path:'teams', 
     component:TeamsComponent, 
@@ -48,6 +55,14 @@ const routes:Routes = [
     {
       player:PlayerDetailResolver
     }
+  },
+  {
+    path:'help',
+    component:HelpComponent
+  },
+  {
+    path:'**',
+    component:PageNotFoundComponent
   }
 ];
 
@@ -60,6 +75,8 @@ const routes:Routes = [
     PlayerDetailComponent,
     MapsStatComponent,
     WeaponsStatComponent,
+    PageNotFoundComponent,
+    HelpComponent
   ],
   imports: [
     BrowserModule,
