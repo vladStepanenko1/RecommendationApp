@@ -65,15 +65,15 @@ namespace RecommendationApp.API.Data
             
             var teamOwners = _context.TeamsData.Where(t => t.OwnerId.HasValue)
                 .Select(t => t.OwnerId.GetValueOrDefault());
-            // var reviewers = _context.Reviews.Where(r => r.Rate.HasValue && r.ReviewerProfileId != r.ProfileId)
-            //     .Select(r => r.ReviewerProfileId);
-            //var reviewersTeamOwners = reviewers.Intersect(teamOwners);
+             var reviewers = _context.Reviews.Where(r => r.Rate.HasValue && r.ReviewerProfileId != r.ProfileId)
+                    .Select(r => r.ReviewerProfileId);
+            var reviewersTeamOwners = reviewers.Intersect(teamOwners);
             var teamPlayers = _context.TeamsUsers.Select(tu => tu.UserProfileId);
             var players = _context.Reviews.Where(r => teamOwners.Contains(r.ProfileId) == false)
                 .Select(r => r.ProfileId);
             players = players.Where(p => teamPlayers.Contains(p) == false);
 
-            var reviewerIndexToId = teamOwners.OrderBy(r => r).Distinct().ToList();
+            var reviewerIndexToId = reviewersTeamOwners.OrderBy(r => r).Distinct().ToList();
             var playerIndexToId = players.OrderBy(p => p).Distinct().ToList();
 
             var modelFilePath = "model.json";
@@ -94,9 +94,16 @@ namespace RecommendationApp.API.Data
             
             foreach(var player in playerWithCalculatedRatings)
             {
-                player.AverageRating = _context.ProfilesRatings.Where(p => p.ProfileId == player.Id)
-                    .Select(p => p.Rating).Average();
+                var profiles = _context.ProfilesRatings.Where(p => p.ProfileId == player.Id);
+                if(profiles.Count() > 0)
+                {
+                    var ratings = profiles.Select(p => p.Rating);
+                    player.AverageRating = ratings.Average();
+                }
             }
+
+            playerWithCalculatedRatings = playerWithCalculatedRatings.Where(p => p.AverageRating > 0)
+                .ToList();
 
             return playerWithCalculatedRatings;
         }

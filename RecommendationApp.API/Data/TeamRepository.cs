@@ -22,7 +22,14 @@ namespace RecommendationApp.API.Data
 
         public PagedList<TeamsData> GetTeams(TeamParams teamParams)
         {
-            var teams = _context.TeamsData.AsQueryable();
+            var teamOwners = _context.TeamsData.Where(t => t.OwnerId.HasValue)
+                .Select(t => t.OwnerId.GetValueOrDefault());
+            var reviewers = _context.Reviews.Where(r => r.Rate.HasValue && r.ReviewerProfileId != r.ProfileId)
+                .Select(r => r.ReviewerProfileId);
+            var reviewersTeamOwners = reviewers.Intersect(teamOwners);
+
+            var teams = _context.TeamsData.Where(t => reviewers.Contains(t.OwnerId.GetValueOrDefault()))
+                .AsQueryable();
 
             if(!string.IsNullOrEmpty(teamParams.Name))
             {

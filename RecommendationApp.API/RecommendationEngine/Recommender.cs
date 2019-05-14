@@ -26,8 +26,6 @@ namespace RecommendationApp.API.RecommendationEngine
 
         public double GetRating(int reviewerIndex, int playerIndex)
         {
-            // int reviewerIndex = reviewerIndexToId.IndexOf(reviewerId);
-            // int playerIndex = playerIndexToId.IndexOf(playerId);
             double ratingToPredict = averageRating + reviewerBiases[reviewerIndex] 
                 + playersBiases[playerIndex] + GetDotProduct(playersFeatures[playerIndex], 
                 reviewersFeatures[reviewerIndex]);

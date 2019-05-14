@@ -13,13 +13,12 @@ export class RecommendedPlayersResolver implements Resolve<Player[]>{
         private alertify:AlertifyService){}
 
     resolve(route: ActivatedRouteSnapshot): Observable<Player[]> {
-        // return this.playerService.getRecommendedPlayers(route.params['id']).pipe(
-        //     catchError(error => {
-        //         this.alertify.error(messages.errors.problemWithRetrievingData);
-        //         this.router.navigate(['/teams']);
-        //         return of(null); // ?
-        //     })
-        // );
-        return of(null);
+        return this.playerService.getRecommendedPlayers(route.params['id']).pipe(
+            catchError(error => {
+                this.alertify.error(messages.errors.problemWithRetrievingData);
+                this.router.navigate(['/teams']);
+                return of(null); // ?
+            })
+        );
     }
 }
