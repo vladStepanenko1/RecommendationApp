@@ -57,7 +57,7 @@ namespace RecommendationApp.API.Controllers
             }
             var averageRatingOverTeam = sumRatingOverTeam / playersOfTeam.Count;
 
-            playersToReturn = playersToReturn.Where(p => p.Country == team.Country);
+            //playersToReturn = playersToReturn.Where(p => p.Country == team.Country);
             playersToReturn = playersToReturn.Where(p => p.AverageRating > averageRatingOverTeam - 1);
             playersToReturn = playersToReturn.Where(p => p.AverageRating < averageRatingOverTeam + 1);
             playersToReturn = playersToReturn.Take(7);

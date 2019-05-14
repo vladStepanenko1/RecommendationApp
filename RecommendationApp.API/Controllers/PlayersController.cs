@@ -37,9 +37,11 @@ namespace RecommendationApp.API.Controllers
 
             playerToReturn.AverageRating = _playerRepository.GetRating(player.Id);
 
+            int yearsOld = 0;
             if (player.Birthday.HasValue)
             {
-                //TODO
+                yearsOld = DateTime.Now.AddYears(-player.Birthday.Value.Year).Year;
+                playerToReturn.Age = yearsOld;
             }
 
             if (stats != null)
