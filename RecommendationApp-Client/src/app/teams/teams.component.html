@@ -1,7 +1,7 @@
 <div class="card mb-3">
   <div class="card-body">
     <form [formGroup]="searchForm" (ngSubmit)="onSubmit()" class="form-inline">
-      <div class="form-group mr-3">
+      <div class="form-group mr-1">
         <label for="teamName">Назва команди</label>
         <input type="text" class="form-control ml-1" name="teamName" formControlName="teamName">
       </div>
@@ -21,7 +21,7 @@
         <input type="number" class="form-control ml-1" name="teamMaxRating" formControlName="teamMaxRating" min="1"
           max="10" step="0.1">
       </div>
-      <button type="submit" class="btn btn-primary mr-2" [disabled]="!searchForm.valid">Пошук</button>
+      <button type="submit" class="btn btn-primary mr-1" [disabled]="!searchForm.valid">Пошук</button>
       <button type="button" class="btn btn-primary" (click)="resetForm()">Очистити фільтр</button>
     </form>
   </div>
