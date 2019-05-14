@@ -1,0 +1,36 @@
+<div class="card">
+  <div *ngIf="player" class="card-body">
+    <div class="row">
+      <p>Номер гравця</p>
+      <p class="ml-3">{{player.id}}</p>
+    </div>
+    <div class="row">
+      <p>Стать</p>
+      <p class="ml-3">{{player.gender == 'm' ? 'чол' : 'жін'}}</p>
+    </div>
+    <div class="row">
+      <p>Вік</p>
+      <p class="ml-3">{{player.age}}</p>
+    </div>
+    <div class="row">
+      <p>Країна</p>
+      <p class="ml-3">{{player.country}}</p>
+    </div>
+    <div class="row">
+      <p>Рейтинг</p>
+      <p class="ml-3">{{player.averageRating | number:'1.1-1'}}</p>
+    </div>
+    <div class="row">
+      <p>Годин проведено у грі</p>
+      <p class="ml-3">{{player.totalTimePlayed / 3600}}</p>
+    </div>
+    <div class="row">
+      <p>Зіграно раундів</p>
+      <p class="ml-3">{{player.totalRoundsPlayed || 'Не вказано'}}</p>
+      <p class="ml-3">з них перемог</p>
+      <p class="ml-3">{{player.totalWins || 'Не вказано'}}</p>
+    </div>
+    <app-maps-stat [mapsStat]="player.mapsStats"></app-maps-stat>
+    <app-weapons-stat [weaponsStat]="player.weaponsStats"></app-weapons-stat>
+  </div>
+</div>

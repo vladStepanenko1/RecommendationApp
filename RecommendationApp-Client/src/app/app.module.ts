@@ -16,6 +16,11 @@ import { CountriesResolver } from './_resolvers/countries.resolver';
 import { ErrorInterceptorProvider } from './_services/error.interceptor';
 import { TeamDetailResolver } from './_resolvers/team-detail.resolver';
 import { RecommendedPlayersResolver } from './_resolvers/recommendedPlayers.resolver';
+import { AlertifyService } from './_services/alertify.service';
+import { PlayerDetailComponent } from './player-detail/player-detail.component';
+import { PlayerDetailResolver } from './_resolvers/player-detail.resolver';
+import { MapsStatComponent } from './maps-stat/maps-stat.component';
+import { WeaponsStatComponent } from './weapons-stat/weapons-stat.component';
 
 const routes:Routes = [
   {
@@ -35,6 +40,14 @@ const routes:Routes = [
       team:TeamDetailResolver,
       recommendedPlayers:RecommendedPlayersResolver
     }
+  },
+  {
+    path:'player/:id',
+    component:PlayerDetailComponent,
+    resolve:
+    {
+      player:PlayerDetailResolver
+    }
   }
 ];
 
@@ -44,6 +57,9 @@ const routes:Routes = [
     TeamsComponent,
     TeamDetailComponent,
     PlayersComponent,
+    PlayerDetailComponent,
+    MapsStatComponent,
+    WeaponsStatComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,12 +71,14 @@ const routes:Routes = [
     HttpClientModule,
   ],
   providers: [
-    ErrorInterceptorProvider,
     TeamService,
     TeamsResolver,
     CountriesResolver,
     TeamDetailResolver,
-    RecommendedPlayersResolver
+    RecommendedPlayersResolver,
+    ErrorInterceptorProvider,
+    AlertifyService,
+    PlayerDetailResolver
   ],
   bootstrap: [AppComponent]
 })

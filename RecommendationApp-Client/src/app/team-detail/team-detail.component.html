@@ -16,12 +16,13 @@
       <p class="ml-3">{{team.rating | number:'1.1-1'}}</p>
     </div>
     <div class="row">
-      <p *ngFor="let map of team.bestMaps" class="mr-3">{{map.mapName}}</p>
+      <p>Карти, на яких показано найвищі результати</p>
+      <p *ngFor="let map of team.bestMaps" class="ml-3">{{map.mapName}}</p>
     </div>
     <app-players [players]="team.players" [tableName]="playersTableName"></app-players>
     <app-players *ngIf="recommendedPlayers" 
                   [players]="recommendedPlayers" 
-                  [tableName]="playersTableName">
+                  [tableName]="recommendedPlayersTableName">
     </app-players>
   </div>
   <button class="btn btn-primary" (click)="goBack()">

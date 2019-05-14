@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using RecommendationApp.API.Data;
@@ -14,9 +16,10 @@ namespace RecommendationApp.API.Controllers
         private IPlayerRepository _playerRepository;
         private IMapper _mapper;
 
-        public RecommendedPlayersController(IPlayerRepository playerRepository)
+        public RecommendedPlayersController(IPlayerRepository playerRepository, IMapper mapper)
         {
             _playerRepository = playerRepository;
+            _mapper = mapper;
         }
 
         [HttpGet]

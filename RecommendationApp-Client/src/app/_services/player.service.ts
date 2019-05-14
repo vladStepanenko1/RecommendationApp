@@ -9,6 +9,13 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class PlayerService {
+    getPlayer(playerId:number) {
+      return this.http.get<Player>(`${this.baseUrl}players/${playerId}`, {observe:'response'}).pipe(
+        map(response => {
+          return response.body;
+        })
+      );
+    }
 
   baseUrl = environment.apiUrl;
 

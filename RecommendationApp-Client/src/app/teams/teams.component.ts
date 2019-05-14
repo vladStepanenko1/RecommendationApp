@@ -4,6 +4,8 @@ import { TeamService } from '../_services/team.service';
 import { Team } from '../_models/team';
 import { Pagination, PaginatedResult } from '../_models/pagination';
 import { ActivatedRoute } from '@angular/router';
+import { AlertifyService } from '../_services/alertify.service';
+import { messages } from '../_models/messages';
 
 @Component({
   selector: 'app-teams',
@@ -25,7 +27,8 @@ export class TeamsComponent implements OnInit {
     teamMaxRating:new FormControl('')
   });
 
-  constructor(private teamService:TeamService, private route:ActivatedRoute) { }
+  constructor(private teamService:TeamService, private route:ActivatedRoute, 
+    private alertify:AlertifyService) { }
 
   ngOnInit() {
     this.route.data.subscribe(data => {
@@ -43,7 +46,9 @@ export class TeamsComponent implements OnInit {
       this.pagination = res.pagination;
     },
     error => {
-      // TODO
+      console.error(error);
+      
+      this.alertify.error(messages.errors.problemWithRetrievingData);
     });
   }
 

@@ -1,6 +1,7 @@
 using AutoMapper;
 using RecommendationApp.API.Dto;
 using RecommendationApp.API.Models;
+using RecommendationApp.API.RecommendationEngine;
 
 namespace RecommendationApp.API.Helpers
 {
@@ -12,6 +13,8 @@ namespace RecommendationApp.API.Helpers
             CreateMap<TeamsData, TeamForDetailsDto>();
             CreateMap<TeamBestMaps, TeamBestMapsDto>();
             CreateMap<Users, PlayerForListDto>();
+            CreateMap<Users, PlayerForDetailsDto>();
+            CreateMap<Player, PlayerForListDto>();
         }
     }
 }
