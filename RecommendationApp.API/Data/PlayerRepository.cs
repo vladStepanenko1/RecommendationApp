@@ -90,7 +90,7 @@ namespace RecommendationApp.API.Data
                 playerWithCalculatedRatings.Add(new Player{Id=playerId, CalculatedRating=calculatedRating});
             }
 
-            playerWithCalculatedRatings.OrderByDescending(p => p.CalculatedRating).Take(20);
+            playerWithCalculatedRatings.OrderByDescending(p => p.CalculatedRating);
             
             foreach(var player in playerWithCalculatedRatings)
             {
@@ -102,8 +102,7 @@ namespace RecommendationApp.API.Data
                 }
             }
 
-            playerWithCalculatedRatings = playerWithCalculatedRatings.Where(p => p.AverageRating > 0)
-                .ToList();
+            playerWithCalculatedRatings = playerWithCalculatedRatings.Where(p => p.AverageRating > 0).ToList();
 
             return playerWithCalculatedRatings;
         }
