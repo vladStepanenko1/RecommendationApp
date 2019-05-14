@@ -1,3 +1,6 @@
+<button class="btn btn-primary mb-3" (click)="goBack()">
+  <i class="fas fa-arrow-circle-left mr-1"></i>Назад
+</button>
 <div class="card">
   <div *ngIf="player" class="card-body">
     <div class="row">
@@ -10,11 +13,11 @@
     </div>
     <div class="row">
       <p>Вік</p>
-      <p class="ml-3">{{player.age}}</p>
+      <p class="ml-3">{{player.age || 'Не вказано'}}</p>
     </div>
     <div class="row">
       <p>Країна</p>
-      <p class="ml-3">{{player.country}}</p>
+      <p class="ml-3">{{player.country || 'Не вказано'}}</p>
     </div>
     <div class="row">
       <p>Рейтинг</p>
@@ -22,7 +25,7 @@
     </div>
     <div class="row">
       <p>Годин проведено у грі</p>
-      <p class="ml-3">{{player.totalTimePlayed / 3600}}</p>
+      <p class="ml-3">{{player.totalTimePlayed || 'Не вказано'}}</p>
     </div>
     <div class="row">
       <p>Зіграно раундів</p>

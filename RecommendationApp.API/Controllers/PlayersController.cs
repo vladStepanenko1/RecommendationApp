@@ -10,7 +10,7 @@ namespace RecommendationApp.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class PlayersController:ControllerBase
+    public class PlayersController : ControllerBase
     {
         private IPlayerRepository _playerRepository;
         private IMapper _mapper;
@@ -25,7 +25,7 @@ namespace RecommendationApp.API.Controllers
         public IActionResult Get(long id)
         {
             var player = _playerRepository.GetPlayer(id);
-            if(player == null)
+            if (player == null)
             {
                 return BadRequest("Player not found");
             }
@@ -34,24 +34,34 @@ namespace RecommendationApp.API.Controllers
             var stats = _playerRepository.GetPlayersStatistics(player.Id);
             var mapsStats = _playerRepository.GetMapsStatistics(player.Id);
             var weaponsStats = _playerRepository.GetWeaponsStatistics(player.Id);
-            
-            var mapsStatsToReturn = _mapper.Map<IEnumerable<MapStatsForListDto>>(mapsStats);
-            var weaponsStatsToReturn = _mapper.Map<IEnumerable<WeaponStatsForListDto>>(weaponsStats);
 
             playerToReturn.AverageRating = _playerRepository.GetRating(player.Id);
-            
-            if(player.Birthday.HasValue)
+
+            if (player.Birthday.HasValue)
             {
                 //TODO
             }
 
-            playerToReturn.TotalTimePlayed = stats.TotalTimePlayed.GetValueOrDefault();
-            playerToReturn.TotalWins = stats.TotalWins.GetValueOrDefault();
-            playerToReturn.TotalRoundsPlayed = stats.TotalRoundsPlayed.GetValueOrDefault();
-            playerToReturn.TotalKills = stats.TotalKills.GetValueOrDefault();
-            playerToReturn.TotalDeaths = stats.TotalDeaths.GetValueOrDefault();
-            playerToReturn.MapsStats = mapsStatsToReturn.ToList();
-            playerToReturn.WeaponsStats = weaponsStatsToReturn.ToList();
+            if (stats != null)
+            {
+                playerToReturn.TotalTimePlayed = stats.TotalTimePlayed.GetValueOrDefault();
+                playerToReturn.TotalWins = stats.TotalWins.GetValueOrDefault();
+                playerToReturn.TotalRoundsPlayed = stats.TotalRoundsPlayed.GetValueOrDefault();
+                playerToReturn.TotalKills = stats.TotalKills.GetValueOrDefault();
+                playerToReturn.TotalDeaths = stats.TotalDeaths.GetValueOrDefault();
+            }
+
+            if (mapsStats.Count() > 0)
+            {
+                var mapsStatsToReturn = _mapper.Map<IEnumerable<MapStatsForListDto>>(mapsStats);
+                playerToReturn.MapsStats = mapsStatsToReturn.ToList();
+            }
+
+            if (weaponsStats.Count() > 0)
+            {
+                var weaponsStatsToReturn = _mapper.Map<IEnumerable<WeaponStatsForListDto>>(weaponsStats);
+                playerToReturn.WeaponsStats = weaponsStatsToReturn.ToList();
+            }
 
             return Ok(playerToReturn);
         }

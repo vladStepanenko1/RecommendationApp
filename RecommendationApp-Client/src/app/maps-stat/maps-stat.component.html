@@ -1,7 +1,10 @@
 <div class="card mb-3">
     <div class="card-body">
       <p>Статистика по картам</p>
-      <table class="table table-hover">
+      <div *ngIf="!mapsStat">
+          <h3 class="empty-stat-message">Дані про статистику відсутні</h3>
+        </div>
+      <table *ngIf="mapsStat" class="table table-hover">
         <thead class="thead-light">
           <th>Назва карти</th>
           <th>Зіграно раундів</th>

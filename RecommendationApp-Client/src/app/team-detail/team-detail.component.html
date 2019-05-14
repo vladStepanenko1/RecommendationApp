@@ -1,3 +1,6 @@
+<button class="btn btn-primary mb-3" (click)="goBack()">
+  <i class="fas fa-arrow-circle-left mr-1"></i>Назад
+</button>
 <div class="card">
   <div *ngIf="team" class="card-body">
     <div class="row">
@@ -17,15 +20,13 @@
     </div>
     <div class="row">
       <p>Карти, на яких показано найвищі результати</p>
-      <p *ngFor="let map of team.bestMaps" class="ml-3">{{map.mapName}}</p>
+      <h3 class="empty-stat-message" *ngIf="team.bestMaps.length == 0">Дані про статистику відсутні</h3>
+      <div *ngIf="team.bestMaps.length > 0">
+        <p *ngFor="let map of team.bestMaps" class="ml-3">{{map.mapName}}</p>
+      </div>
     </div>
     <app-players [players]="team.players" [tableName]="playersTableName"></app-players>
-    <app-players *ngIf="recommendedPlayers" 
-                  [players]="recommendedPlayers" 
-                  [tableName]="recommendedPlayersTableName">
+    <app-players *ngIf="recommendedPlayers" [players]="recommendedPlayers" [tableName]="recommendedPlayersTableName">
     </app-players>
   </div>
-  <button class="btn btn-primary" (click)="goBack()">
-    <i class="fas fa-arrow-circle-left mr-1"></i>Назад
-  </button>
 </div>

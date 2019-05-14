@@ -11,11 +11,15 @@ import { Player } from '../_models/player';
 export class PlayerDetailComponent implements OnInit {
   player:Player;
 
-  constructor(private route:ActivatedRoute) { }
+  constructor(private route:ActivatedRoute, private location:Location) { }
 
   ngOnInit() {
     this.route.data.subscribe(data => {
       this.player = data.player;
     });
+  }
+
+  goBack(){
+    this.location.back();
   }
 }
